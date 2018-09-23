@@ -30,34 +30,45 @@ const styles = theme => ({
 const Excercises = props => {
   const { classes } = props;
   const { exercises } = props;
+  const { category } = props;
+  const { exercise } = props;
+
+  console.log(props);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            {exercises.map(([group, exercises]) => (
-              <Fragment>
-                <Typography className={classes.typography} variant="headline">
-                  {group}
-                </Typography>
-                <List component="nav">
-                  {exercises.map(({ title }) => (
-                    <ListItem button>
-                      <ListItemText primary={title} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Fragment>
-            ))}
+            {exercises.map(
+              ([group, exercises]) =>
+                !category || category === group ? (
+                  <Fragment>
+                    <Typography
+                      className={classes.typography}
+                      variant="headline"
+                    >
+                      {group}
+                    </Typography>
+                    <List component="nav">
+                      {exercises.map(({ id, title }) => (
+                        <ListItem button>
+                          <ListItemText
+                            primary={title}
+                            onClick={() => props.onSelect(id)}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Fragment>
+                ) : null
+            )}
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <Typography variant="display1">Welcome!!</Typography>
-            <Typography variant="subheading">
-              Please select an exercise from on the left
-            </Typography>
+            <Typography variant="display1">{exercise.title}</Typography>
+            <Typography variant="subheading">{exercise.description}</Typography>
           </Paper>
         </Grid>
       </Grid>

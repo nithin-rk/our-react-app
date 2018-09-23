@@ -5,10 +5,12 @@ import { muscles, exercises } from "../store";
 
 class App extends Component {
   state = {
-    exercises
+    exercises,
+    category: "",
+    execise: {}
   };
 
-  getExcercisesByMuscles() {
+  getExercisesByMuscles() {
     return Object.entries(
       this.state.exercises.reduce((exercises, exercise) => {
         const { muscles } = exercise;
@@ -20,13 +22,36 @@ class App extends Component {
       }, {})
     );
   }
+
+  handleCategoryClick = category => {
+    this.setState({
+      category
+    });
+  };
+
+  handleExerciseSelect = id => {
+    console.log({ exercises });
+    this.setState(({ exercises }) => ({
+      exercise: exercises.find(ex => ex.id === id)
+    }));
+  };
   render() {
-    const exercises = this.getExcercisesByMuscles();
+    const exercises = this.getExercisesByMuscles();
+
     return (
       <Fragment>
         <Header />
-        <Excercises exercises={exercises} />
-        <Footer muscles={muscles} />
+        <Excercises
+          exercises={exercises}
+          category={this.state.category}
+          onSelect={this.handleExerciseSelect}
+          exercise={this.state.execise}
+        />
+        <Footer
+          muscles={muscles}
+          category={this.state.category}
+          onSelect={this.handleCategoryClick}
+        />
       </Fragment>
     );
   }

@@ -5,7 +5,7 @@ export default props => (
   <AppBar position="static">
     <Toolbar>
       <Typography variant="headline" color="inherit">
-        Excercise Database
+        Exercise Database
       </Typography>
     </Toolbar>
   </AppBar>
