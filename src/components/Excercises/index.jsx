@@ -33,8 +33,6 @@ const Excercises = props => {
   const { category } = props;
   const { exercise } = props;
 
-  console.log(props);
-
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
@@ -67,7 +65,7 @@ const Excercises = props => {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <Typography variant="display1">{exercise.title}</Typography>
+            <Typography variant="headline">{exercise.title}</Typography>
             <Typography variant="subheading">{exercise.description}</Typography>
           </Paper>
         </Grid>

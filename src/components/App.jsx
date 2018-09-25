@@ -7,7 +7,7 @@ class App extends Component {
   state = {
     exercises,
     category: "",
-    execise: {}
+    exercise: {}
   };
 
   getExercisesByMuscles() {
@@ -30,10 +30,9 @@ class App extends Component {
   };
 
   handleExerciseSelect = id => {
-    console.log({ exercises });
-    this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id)
-    }));
+    const exercises = [...this.state.exercises];
+    const exercise = exercises.find(ex => ex.id === id);
+    this.setState({ exercise });
   };
   render() {
     const exercises = this.getExercisesByMuscles();
@@ -45,7 +44,7 @@ class App extends Component {
           exercises={exercises}
           category={this.state.category}
           onSelect={this.handleExerciseSelect}
-          exercise={this.state.execise}
+          exercise={this.state.exercise}
         />
         <Footer
           muscles={muscles}
